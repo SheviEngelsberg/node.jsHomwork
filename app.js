@@ -5,14 +5,14 @@ const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", false);
   
-  const mongoDB = "mongodb://localhost:27017/myYad2DB";
+const mongoDB = "mongodb://localhost:27017/myYad2DB";
   
-  main().catch((err) => console.log(err));
+main().catch((err) => console.log(err));
   
-  async function main() {
-    await mongoose.connect(mongoDB);
-    console.log("mongoDB connected");
-  }
+async function main() {
+  await mongoose.connect(mongoDB);
+  console.log("mongoDB connected");
+}
 
 const categories = require('./routers/categoriesRouter'); 
 const products = require('./routers/productsRouter');
@@ -33,9 +33,9 @@ app.use(products);
 app.use(categories);
 
 app.use((err, res) =>{
-    res.status(500).send("There is a problem with the server, we will try again later" + err.message);
+  res.status(500).send("There is a problem with the server, we will try again later" + err.message);
 })
 
 app.listen(3000, () => { 
-    console.log("listening on http://localhost:3000"); 
+  console.log("listening on http://localhost:3000"); 
 });
