@@ -1,14 +1,12 @@
 const categoriesDB=require("../models/categories")
 
-
-
 // Get all categories sorted alphabetically
 const getAllCategories = async (req, res) => {
   try {
-      const categories= await categoriesDB.find();
-      const sortedCategories = categories.toSorted((a,b)=>{
-        return a.name.localeCompare(b.name) 
-      });
+    const categories= await categoriesDB.find();
+    const sortedCategories = categories.toSorted((a,b)=>{
+      return a.name.localeCompare(b.name) 
+    });
     res.send(sortedCategories);
   } catch (err) {
     res.status(404).send("categories not found");
@@ -40,14 +38,13 @@ const createCategory =  async (req, res) => {
 // Update a category by name
 const updateCategory = async (req, res) => {
   try {
-        const categoryId = req.params.id
-        await categoriesDB.findByIdAndUpdate(categoryId, { name: req.body.name })
-        res.send('the category updated successfully');
+    const categoryId = req.params.id
+    await categoriesDB.findByIdAndUpdate(categoryId, { name: req.body.name })
+    res.send('the category updated successfully');
   } catch (err) {
     res.status(404).send('Cannot update not found category  ' + err.message);
   }
 };
-
 
 // Delete a category by id
 const deleteCategory = async (req, res) => {
@@ -61,11 +58,10 @@ const deleteCategory = async (req, res) => {
   }
 };
 
-
 module.exports = {
-    getAllCategories,
-    getCategory,
-    createCategory,
-    updateCategory,
-    deleteCategory
-  };
+  getAllCategories,
+  getCategory,
+  createCategory,
+  updateCategory,
+  deleteCategory
+};
